@@ -75,3 +75,17 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    body {
+        height: auto;
+        padding: 1rem;
+    }
+
+    .container {
+        width: 100%;
+        padding: 1.5rem;
+        box-sizing: border-box;
+    }
+}

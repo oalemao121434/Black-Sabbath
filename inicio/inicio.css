@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+.sidebar-toggle {
+    display: none;
+}
+
 body {
     font-family: 'Montserrat', Arial, sans-serif;
     background: #0b1a2b;
@@ -20,8 +24,8 @@ body {
 
 /* Header */
 header {
-    background: #1a2a4a;
-    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    background: #223366; /* More solid and standout blue */
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.6); /* Yellow glow shadow */
     position: fixed;
     width: 100%;
     top: 0;
@@ -33,6 +37,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
+    gap: 2rem;
 }
 
 .logo {
@@ -51,14 +56,37 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #ffeb99; /* Brighter yellowish text */
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    transition: color 0.3s ease, background-color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 2px solid transparent;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
 }
 
 nav ul li a:hover {
-    color: #ffcc00;
+    color: #0b1a2b;
+    background-color: #ffcc00; /* Yellow background highlight */
+    border-bottom: 2px solid #ffcc00;
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nav-toggle-label span {
+    width: 25px;
+    height: 3px;
+    background: #ffcc00; /* Yellow hamburger bars */
+    transition: 0.3s;
 }
 
 .header-icons {
@@ -75,6 +103,36 @@ nav ul li a:hover {
 
 .cart-icon:hover, .user-icon:hover {
     color: #ffcc00;
+}
+
+.sidebar-toggle-btn {
+    color: #ffeb99;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin-right: 1rem;
+}
+
+.sidebar-toggle-btn:hover {
+    color: #ffcc00;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: #1a2a4a;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease;
+    z-index: 1001;
+    padding: 1rem;
+}
+
+#sidebar-toggle:checked ~ header ~ .sidebar {
+    left: 0;
 }
 
 /* Hero Section */
@@ -194,6 +252,7 @@ footer {
     background: #1a2a4a;
     padding: 2rem 0;
     margin-top: 4rem;
+    border-top: 2px solid #ffcc00;
 }
 
 .footer-container {
@@ -201,17 +260,20 @@ footer {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .footer-links {
     display: flex;
     list-style: none;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .footer-links a {
     color: #fff;
     text-decoration: none;
+    font-weight: 600;
     transition: color 0.3s ease;
 }
 
@@ -226,16 +288,48 @@ footer {
         gap: 1rem;
     }
 
-    nav ul {
-        margin: 1rem 0;
+    .nav-toggle-label {
+        display: flex;
+        order: 2;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(26, 42, 74, 0.9);
+        padding: 1rem 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-toggle:checked ~ .nav-links {
+        display: flex;
     }
 
     nav ul li {
-        margin-left: 1rem;
+        margin: 0;
+        text-align: center;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 0.75rem 0;
     }
 
     .hero-content h1 {
         font-size: 2rem;
+    }
+
+    .banner-img {
+        width: 100vw;
+        height: 150px;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        left: 50%;
+        right: 50%;
     }
 
     .products h2 {
