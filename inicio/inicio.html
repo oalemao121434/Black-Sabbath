@@ -10,6 +10,7 @@
 </head>
 <body>
     <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
+    <div class="sidebar-overlay" onclick="document.getElementById('sidebar-toggle').checked = false;"></div>
     <header>
         <div class="container header-container">
             <div class="logo">BLACK SABBATH</div>
@@ -21,19 +22,41 @@
                     <span></span>
                 </label>
                 <ul class="nav-links">
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Produtos</a></li>
                 </ul>
             </nav>
             <div class="header-icons">
                 <label for="sidebar-toggle" class="sidebar-toggle-btn" title="Abrir Sidebar">&#9776;</label>
-                <a href="#" class="cart-icon" title="Carrinho">&#128722;</a>
                 <a href="../login/login.html" class="user-icon" title="Minha Conta">&#128100;</a>
             </div>
         </div>
     </header>
     <div class="sidebar">
-        <!-- Sidebar content here -->
+        <div class="sidebar-header">
+            <h3 class="sidebar-title">Menu</h3>
+            <button class="sidebar-close-btn" onclick="document.getElementById('sidebar-toggle').checked = false;">&times;</button>
+        </div>
+        <div class="sidebar-content">
+            <ul class="sidebar-links">
+                <li>
+                    <a href="#" class="sidebar-link">
+                        <span class="link-icon">🏠</span>
+                        <span class="link-text">Início</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link">
+                        <span class="link-icon">🛒</span>
+                        <span class="link-text">Carrinho</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../login/login.html" class="sidebar-link">
+                        <span class="link-icon">👤</span>
+                        <span class="link-text">Minha Conta</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <main>
