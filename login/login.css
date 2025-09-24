@@ -70,6 +70,27 @@ a:hover {
 }
 
 /* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        max-width: 400px;
+        padding: 2rem;
+    }
+
+    button {
+        padding: 1rem;
+        min-height: 44px;
+        font-size: 1.1rem;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        padding: 0.75rem;
+        font-size: 1rem;
+        min-height: 44px;
+    }
+}
+
 @media (max-width: 480px) {
     body {
         height: auto;
@@ -82,8 +103,25 @@ a:hover {
         box-sizing: border-box;
     }
 
+    h1 {
+        font-size: 1.5rem;
+    }
+
     input[type="email"],
     input[type="password"] {
         width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        min-height: 44px;
+    }
+
+    button {
+        padding: 1rem;
+        min-height: 44px;
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 0.8rem;
     }
 }

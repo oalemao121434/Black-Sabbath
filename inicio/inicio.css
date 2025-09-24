@@ -71,23 +71,7 @@ nav ul li a:hover {
     border-bottom: 2px solid #ffcc00;
 }
 
-.nav-toggle {
-    display: none;
-}
 
-.nav-toggle-label {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.nav-toggle-label span {
-    width: 25px;
-    height: 3px;
-    background: #ffcc00; /* Yellow hamburger bars */
-    transition: 0.3s;
-}
 
 .header-icons {
     display: flex;
@@ -277,6 +261,11 @@ nav ul li a:hover {
     flex: 1;
 }
 
+/* Main Content */
+main {
+    margin-top: 80px; /* Space for fixed header */
+}
+
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, #0b1a2b 0%, #1a2a4a 100%);
@@ -285,16 +274,12 @@ nav ul li a:hover {
 }
 
 .banner-img {
-    width: 115vw;
-    height: 200px;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
     object-fit: cover;
     border-radius: 0;
     margin-bottom: 20px;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -110vw;
-    margin-right: -50vw;
 }
 
 .hero-content h1 {
@@ -424,58 +409,68 @@ footer {
 }
 
 /* Responsive Design */
+@media (max-width: 900px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .products h2 {
+        font-size: 2.2rem;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .header-container {
         flex-direction: column;
         gap: 1rem;
     }
 
-    .nav-toggle-label {
-        display: flex;
-        order: 2;
-    }
-
-    .nav-links {
-        display: none;
+    nav ul {
         flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
+        gap: 1rem;
         width: 100%;
-        background: rgba(26, 42, 74, 0.9);
-        padding: 1rem 0;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .nav-toggle:checked ~ .nav-links {
-        display: flex;
+        text-align: center;
     }
 
     nav ul li {
         margin: 0;
-        text-align: center;
     }
 
     nav ul li a {
         display: block;
         padding: 0.75rem 0;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .hero-content h1 {
         font-size: 2rem;
     }
 
-    .banner-img {
-        width: 100vw;
-        height: 150px;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        left: 50%;
-        right: 50%;
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .btn-primary {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        min-height: 44px;
     }
 
     .products h2 {
         font-size: 2rem;
+    }
+
+    .product-card button {
+        padding: 1rem;
+        min-height: 44px;
     }
 
     .footer-container {
@@ -489,6 +484,14 @@ footer {
         gap: 1rem;
     }
 
+    .footer-links a {
+        padding: 0.5rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     /* Sidebar mobile improvements */
     .sidebar {
         width: 280px;
@@ -496,8 +499,9 @@ footer {
     }
 
     .sidebar-link {
-        padding: 0.75rem;
+        padding: 1rem;
         font-size: 1rem;
+        min-height: 44px;
     }
 
     .link-icon {
@@ -507,6 +511,30 @@ footer {
 
     .sidebar-title {
         font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .products h2 {
+        font-size: 1.8rem;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .sidebar {
+        width: 250px;
+        left: -250px;
     }
 }
 
@@ -523,7 +551,34 @@ footer {
         margin-left: 0.5rem;
     }
 
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    .products h2 {
+        font-size: 1.6rem;
+    }
+
     .product-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .sidebar-link {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .link-icon {
+        font-size: 1rem;
+        margin-right: 0.5rem;
+    }
+
+    .sidebar-title {
+        font-size: 1rem;
     }
 }
