@@ -136,3 +136,5 @@ window.CelestialStars = {
     filterProducts,
     updateCartCount
 };
+
+
