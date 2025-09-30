@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BLACK SABBATH Cosmos - Sua Loja Intergaláctica</title>
-    <link rel="icon" type="image/jpeg" href="imgs/favicon.jpg" />
+    <title>BLACK SABBATH Cosmos</title>
     <link rel="stylesheet" href="inicio.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
-    <div class="sidebar-overlay" onclick="document.getElementById('sidebar-toggle').checked = false;"></div>
-    
     <!-- Loading Screen -->
     <div class="loading-screen">
         <div class="loading-content">
@@ -23,20 +19,8 @@
                 <div class="planet"></div>
             </div>
             <h2>BLACK SABBATH COSMOS</h2>
-            <p>Inicializando sistema estelar...</p>
+            <p>Inicializando sistema...</p>
         </div>
-    </div>
-
-    <!-- Floating Particles -->
-    <div class="particles-container">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
     </div>
 
     <header>
@@ -45,112 +29,31 @@
                 <span class="logo-icon">🌌</span>
                 BLACK SABBATH COSMOS
             </div>
-            <div class="header-icons">
-                <label for="sidebar-toggle" class="sidebar-toggle-btn" title="Navegação Interstelar">
-                    <i class="fas fa-stars"></i>
-                </label>
-                <a href="../login/login.html" class="user-icon" title="Portal do Viajante">
-                    <i class="fas fa-user-astronaut"></i>
-                </a>
-            </div>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="../inicio/inicio.html">Início</a></li>
+                    <li><a href="../login/login.html">Login</a></li>
+                    <li><a href="../registrar/registro.html">Registrar</a></li>
+                    <li><a href="../carrinho/carrinho.html">Carrinho</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h3 class="sidebar-title">
-                <i class="fas fa-rocket"></i>
-                Navegação Espacial
-            </h3>
-            <button class="sidebar-close-btn" onclick="document.getElementById('sidebar-toggle').checked = false;">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="sidebar-content">
-            <ul class="sidebar-links">
-                <li>
-                    <a href="inicio.html" class="sidebar-link">
-                        <span class="link-icon"><i class="fas fa-home"></i></span>
-                        <span class="link-text">Base Central</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#produtos" class="sidebar-link">
-                        <span class="link-icon"><i class="fas fa-meteor"></i></span>
-                        <span class="link-text">Artefatos Cósmicos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#carrinho" class="sidebar-link">
-                        <span class="link-icon"><i class="fas fa-shopping-cart"></i></span>
-                        <span class="link-text">Carga Espacial</span>
-                        <span class="cart-badge">0</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../login/login.html" class="sidebar-link">
-                        <span class="link-icon"><i class="fas fa-user-astronaut"></i></span>
-                        <span class="link-text">Portal do Viajante</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#missoes" class="sidebar-link">
-                        <span class="link-icon"><i class="fas fa-satellite"></i></span>
-                        <span class="link-text">Missões Especiais</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#galeria" class="sidebar-link">
-                        <span class="link-icon"><i class="fas fa-galaxy"></i></span>
-                        <span class="link-text">Galáxia</span>
-                    </a>
-                </li>
-            </ul>
-            
-            <div class="sidebar-footer">
-                <div class="user-status">
-                    <div class="status-indicator online"></div>
-                    <span>Conectado ao Sistema</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <main>
-        <!-- Hero Section com Efeito Parallax -->
+        <!-- Hero Section -->
         <section class="hero">
-            <div class="stars"></div>
-            <div class="twinkling"></div>
             <div class="container hero-content">
-                <div class="hero-badge">
-                    <span class="badge-text">🌠 NOVA EXPANSÃO DISPONÍVEL</span>
-                </div>
                 <h1 class="hero-title">
                     <span class="title-glow">EXPLORE O COSMOS</span>
                     <span class="title-sub">COM BLACK SABBATH</span>
                 </h1>
                 <p class="hero-description">
-                    Descubra <span class="text-gradient">artefatos intergalácticos</span> e 
-                    <span class="text-gradient">tecnologia estelar</span> para sua jornada pelo universo
+                    Descubra artefatos intergalácticos e tecnologia estelar
                 </p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">10K+</span>
-                        <span class="stat-label">Viajantes Espaciais</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">500+</span>
-                        <span class="stat-label">Sistemas Descobertos</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">99.9%</span>
-                        <span class="stat-label">Satisfação Orbital</span>
-                    </div>
-                </div>
                 <a href="#produtos" class="btn-primary">
                     <i class="fas fa-rocket"></i>
                     INICIAR EXPLORAÇÃO
-                    <div class="btn-glow"></div>
                 </a>
             </div>
         </section>
@@ -163,226 +66,11 @@
                         <i class="fas fa-meteor"></i>
                         Artefatos Cósmicos
                     </h2>
-                    <p class="section-subtitle">Tecnologia avançada de civilizações distantes</p>
-                </div>
-                
-                <div class="category-filters">
-                    <button class="filter-btn active" data-filter="all">Todos os Itens</button>
-                    <button class="filter-btn" data-filter="tecnologia">Tecnologia</button>
-                    <button class="filter-btn" data-filter="minerais">Minerais Raros</button>
-                    <button class="filter-btn" data-filter="nave">Navegação</button>
+                    <p class="section-subtitle">Tecnologia de civilizações distantes</p>
                 </div>
 
-                <div class="product-grid">
-                    <!-- Produto 1 -->
-                    <div class="product-card" data-category="tecnologia">
-                        <div class="card-badge popular">POPULAR</div>
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Núcleo Estelar Avançado" />
-                            <div class="image-overlay">
-                                <button class="quick-view" data-product="1">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="product-card-content">
-                            <div class="product-category">
-                                <i class="fas fa-atom"></i>
-                                Tecnologia Estelar
-                            </div>
-                            <h3>Núcleo Estelar Avançado</h3>
-                            <p class="product-description">
-                                Gere energia ilimitada com este núcleo de última geração, 
-                                capaz de alimentar naves por séculos.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature">
-                                    <i class="fas fa-bolt"></i>
-                                    500TW
-                                </span>
-                                <span class="feature">
-                                    <i class="fas fa-infinity"></i>
-                                    Eterna
-                                </span>
-                            </div>
-                            <div class="product-footer">
-                                <div class="price">
-                                    <span class="price-currency">₪</span>
-                                    <span class="price-amount">2.499</span>
-                                    <span class="price-crypto">| 0.5 ETH</span>
-                                </div>
-                                <button class="add-to-cart" data-product="1">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    Adquirir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Produto 2 -->
-                    <div class="product-card" data-category="minerais">
-                        <div class="card-badge new">NOVO</div>
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Cristal de Nebulosa" />
-                            <div class="image-overlay">
-                                <button class="quick-view" data-product="2">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="product-card-content">
-                            <div class="product-category">
-                                <i class="fas fa-gem"></i>
-                                Mineral Raro
-                            </div>
-                            <h3>Cristal de Nebulosa Orion</h3>
-                            <p class="product-description">
-                                Cristal formado no coração da Nebulosa de Orion, 
-                                com propriedades de amplificação quântica únicas.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature">
-                                    <i class="fas fa-weight-hanging"></i>
-                                    2.5kg
-                                </span>
-                                <span class="feature">
-                                    <i class="fas fa-palette"></i>
-                                    Multicolor
-                                </span>
-                            </div>
-                            <div class="product-footer">
-                                <div class="price">
-                                    <span class="price-currency">₪</span>
-                                    <span class="price-amount">1.799</span>
-                                    <span class="price-crypto">| 0.3 ETH</span>
-                                </div>
-                                <button class="add-to-cart" data-product="2">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    Adquirir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Produto 3 -->
-                    <div class="product-card" data-category="nave">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Sistema de Navegação Quântica" />
-                            <div class="image-overlay">
-                                <button class="quick-view" data-product="3">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="product-card-content">
-                            <div class="product-category">
-                                <i class="fas fa-satellite"></i>
-                                Navegação
-                            </div>
-                            <h3>Navegador Quântico X1</h3>
-                            <p class="product-description">
-                                Sistema de navegação que dobra o espaço-tempo, 
-                                reduzindo viagens interestelares em 90%.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature">
-                                    <i class="fas fa-tachometer-alt"></i>
-                                    Instantâneo
-                                </span>
-                                <span class="feature">
-                                    <i class="fas fa-map-marked-alt"></i>
-                                    Universal
-                                </span>
-                            </div>
-                            <div class="product-footer">
-                                <div class="price">
-                                    <span class="price-currency">₪</span>
-                                    <span class="price-amount">3.999</span>
-                                    <span class="price-crypto">| 0.8 ETH</span>
-                                </div>
-                                <button class="add-to-cart" data-product="3">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    Adquirir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Produto 4 -->
-                    <div class="product-card" data-category="tecnologia">
-                        <div class="card-badge limited">LIMITADO</div>
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Traje Espacial Avançado" />
-                            <div class="image-overlay">
-                                <button class="quick-view" data-product="4">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="product-card-content">
-                            <div class="product-category">
-                                <i class="fas fa-user-astronaut"></i>
-                                Equipamento
-                            </div>
-                            <h3>Traje Espacial Quantum</h3>
-                            <p class="product-description">
-                                Traje com tecnologia de teletransporte integrada e 
-                                proteção contra radiação cósmica nível 9.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature">
-                                    <i class="fas fa-shield-alt"></i>
-                                    Nível 9
-                                </span>
-                                <span class="feature">
-                                    <i class="fas fa-temperature-low"></i>
-                                    -270°C
-                                </span>
-                            </div>
-                            <div class="product-footer">
-                                <div class="price">
-                                    <span class="price-currency">₪</span>
-                                    <span class="price-amount">4.599</span>
-                                    <span class="price-crypto">| 1.0 ETH</span>
-                                </div>
-                                <button class="add-to-cart" data-product="4">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    Adquirir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="products-cta">
-                    <h3>Pronto para sua próxima missão interestelar?</h3>
-                    <p>Junte-se a milhares de exploradores espaciais</p>
-                    <button class="btn-secondary">
-                        <i class="fas fa-compass"></i>
-                        EXPLORAR MAIS
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section class="newsletter">
-            <div class="container">
-                <div class="newsletter-content">
-                    <div class="newsletter-text">
-                        <h3>
-                            <i class="fas fa-satellite-dish"></i>
-                            Receba Transmissões Espaciais
-                        </h3>
-                        <p>Fique por dentro das novas descobertas e missões especiais</p>
-                    </div>
-                    <div class="newsletter-form">
-                        <input type="email" placeholder="Seu e-mail intergaláctico..." class="newsletter-input">
-                        <button class="btn-newsletter">
-                            <i class="fas fa-paper-plane"></i>
-                            ASSINAR
-                        </button>
-                    </div>
+                <div class="product-grid" id="product-grid">
+                    <!-- Produtos serão carregados via JavaScript -->
                 </div>
             </div>
         </section>
@@ -390,82 +78,20 @@
 
     <footer>
         <div class="container footer-container">
-            <div class="footer-main">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <span class="logo-icon">🌌</span>
-                        BLACK SABBATH COSMOS
-                    </div>
-                    <p class="footer-description">
-                        Sua porta de entrada para o universo. 
-                        Explorando fronteiras desde 2024.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" class="social-link" title="Transmissão Orbital">
-                            <i class="fab fa-discord"></i>
-                        </a>
-                        <a href="#" class="social-link" title="Canal Espacial">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" title="Galáxia Virtual">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" title="Comunidade Estelar">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-icon">🌌</span>
+                    BLACK SABBATH COSMOS
                 </div>
-
-                <div class="footer-links-grid">
-                    <div class="footer-column">
-                        <h4>Exploração</h4>
-                        <ul>
-                            <li><a href="#"><i class="fas fa-rocket"></i> Missões</a></li>
-                            <li><a href="#"><i class="fas fa-map-marked-alt"></i> Mapas Estelares</a></li>
-                            <li><a href="#"><i class="fas fa-satellite"></i> Satélites</a></li>
-                            <li><a href="#"><i class="fas fa-user-astronaut"></i> Treinamento</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-column">
-                        <h4>Recursos</h4>
-                        <ul>
-                            <li><a href="#"><i class="fas fa-gem"></i> Minerais</a></li>
-                            <li><a href="#"><i class="fas fa-tools"></i> Equipamentos</a></li>
-                            <li><a href="#"><i class="fas fa-flask"></i> Pesquisa</a></li>
-                            <li><a href="#"><i class="fas fa-database"></i> Dados</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-column">
-                        <h4>Suporte</h4>
-                        <ul>
-                            <li><a href="#"><i class="fas fa-life-ring"></i> Centro de Ajuda</a></li>
-                            <li><a href="#"><i class="fas fa-comments"></i> Contato</a></li>
-                            <li><a href="#"><i class="fas fa-shield-alt"></i> Segurança</a></li>
-                            <li><a href="#"><i class="fas fa-sync-alt"></i> Status</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <p class="footer-description">
+                    Sua porta de entrada para o universo.
+                </p>
             </div>
-
             <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p>&copy; 2024 BLACK SABBATH COSMOS. Todos os direitos reservados.</p>
-                    <div class="footer-legal">
-                        <a href="#">Política Estelar</a>
-                        <a href="#">Termos da Missão</a>
-                        <a href="#">Privacidade Quântica</a>
-                    </div>
-                </div>
+                <p>&copy; 2024 BLACK SABBATH COSMOS.</p>
             </div>
         </div>
     </footer>
-
-    <!-- Floating Action Button -->
-    <button class="fab" title="Central de Comando">
-        <i class="fas fa-stars"></i>
-    </button>
 
     <script src="inicio.js"></script>
 </body>
