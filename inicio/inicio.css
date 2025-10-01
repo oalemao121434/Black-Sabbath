@@ -98,11 +98,28 @@ body {
 
 /* Header */
 header {
-    background: url('../imgs/espaço-sideral.jpg') center/cover no-repeat;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+}
+
+/* Imagem acima da navbar */
+.header-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.header-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Container da navbar */
+.navbar-container {
+    background: rgba(11, 26, 43, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -153,7 +170,7 @@ header {
 
 /* Main Content */
 main {
-    padding-top: 80px;
+    padding-top: 210px;
 }
 
 /* Hero Section */
@@ -307,11 +324,45 @@ footer {
     padding: 2rem 0;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
 }
 
 .footer-description {
     color: var(--text-secondary);
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.footer-links {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+}
+
+.footer-social {
+    margin-bottom: 1rem;
+}
+
+.footer-social a {
+    color: var(--text-secondary);
+    margin: 0 0.5rem;
+    font-size: 1.2rem;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: var(--primary);
 }
 
 .footer-bottom {
@@ -336,5 +387,13 @@ footer {
     
     .logo {
         font-size: 1.2rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .nav-links li a {
+        padding: 0.5rem;
     }
 }
