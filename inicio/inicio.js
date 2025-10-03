@@ -19,12 +19,20 @@ class BlackSabbathCosmos {
 
     async loadProducts() {
         try {
-            // Carregar produtos do db.json
-            const response = await fetch('http://localhost:3000/products');
-            this.products = await response.json();
+            // Carregar planetas do db.json local
+            const response = await fetch('../json/db.json');
+            const data = await response.json();
+            // Ajustar para usar a chave correta do JSON "planetas"
+            this.products = data.planetas.map(p => ({
+                id: p.id,
+                name: p.nome,
+                description: p.descricao,
+                price: p.preco_usd,
+                image: p.imagens[0] || ''
+            }));
             this.renderProducts();
         } catch (error) {
-            console.error('Erro ao carregar produtos:', error);
+            console.error('Erro ao carregar planetas:', error);
             // Fallback para produtos locais
             this.products = this.getFallbackProducts();
             this.renderProducts();

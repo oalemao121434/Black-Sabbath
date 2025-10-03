@@ -252,9 +252,19 @@ main {
 }
 
 .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.product-card {
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+    width: 280px;
+    margin-right: 1rem;
 }
 
 .product-card {
