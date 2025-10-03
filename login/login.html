@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Celestial Stars Ecommerce</title>
     <link rel="icon" type="image/jpeg" href="../imgs/favicon.jpg" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <header>
         <div class="container header-container">
             <div class="logo">
-                <span class="logo-icon">🌌</span>
-                BLACK SABBATH COSMOS
+                <span class="logo-text">BLACK SABBATH COSMOS</span>
             </div>
             <nav class="navbar">
                 <ul class="nav-links">
@@ -25,21 +24,57 @@
             </nav>
         </div>
     </header>
-    <div class="container">
-        <h1>Login</h1>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+
+    <div class="main-container">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Bem-vindo de Volta</h1>
+                <p>Entre na sua conta para continuar</p>
             </div>
-            <div class="form-group">
-                <label for="password">Senha:</label>
-                <input type="password" id="password" name="password" required>
+            
+            <form id="loginForm" class="auth-form">
+                <div class="input-group">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" required placeholder="Digite sua senha">
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Lembrar de mim
+                    </label>
+                    <a href="../recuperar-senha/recuperar-senha.html" class="forgot-password">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Entrar</span>
+                    <div class="btn-loader"></div>
+                </button>
+            </form>
+
+            <div class="form-footer">
+                <p>Não tem uma conta? <a href="../registrar/registro.html" class="auth-link">Criar Conta</a></p>
             </div>
-            <button type="submit">Entrar</button>
-        </form>
-        <p>Não tem conta? <a href="../registrar/registro.html">Registrar</a></p>
+        </div>
+
+        <div class="decoration-side">
+            <div class="stars-overlay"></div>
+            <div class="cosmic-content">
+                <div class="planet"></div>
+                <h2>Bem-vindo à Nossa Galáxia</h2>
+                <p>Acesse sua conta e descubra um universo de possibilidades</p>
+            </div>
+        </div>
     </div>
+
     <script src="login.js"></script>
 </body>
 </html>
