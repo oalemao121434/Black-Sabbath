@@ -1,6 +1,4 @@
-# TODO: Add Navbar Links to All Pages
-
-- [x] Update inicio/inicio.html to include navigation menu with links to all pages
-- [x] Add header with navigation menu to login/login.html
-- [x] Add header with navigation menu to registrar/registro.html
-- [x] Create carrinho/carrinho.html with header and navigation menu
+- [x] Modificar registrar/registro.js para usar localStorage ao invés de API
+- [ ] Modificar login/login.js para verificar credenciais no localStorage
+- [ ] Gerar token simples para autenticação
+- [ ] Testar registro e login

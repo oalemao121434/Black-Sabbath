@@ -82,50 +82,53 @@ document.getElementById('password').addEventListener('input', function(e) {
 async function registerUser(userData) {
     const button = document.querySelector('.submit-btn');
     const originalText = button.querySelector('.btn-text').textContent;
-    
+
     // Show loading state
     button.classList.add('loading');
     button.disabled = true;
 
     try {
-        const response = await fetch(`${API_BASE_URL}/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: userData.nome,
-                email: userData.email,
-                password: userData.password
-            })
-        });
+        // Simular delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
-        const data = await response.json();
+        // Verificar se usuário já existe
+        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        const userExists = existingUsers.find(user => user.email === userData.email);
 
-        if (response.ok) {
-            showSuccess('Registro realizado com sucesso! Redirecionando para login...');
-            
-            // Salvar token no localStorage se necessário
-            if (data.data && data.data.token) {
-                localStorage.setItem('authToken', data.data.token);
-                localStorage.setItem('user', JSON.stringify(data.data.user));
-            }
-            
-            // Redirecionar para a página de login após 2 segundos
-            setTimeout(() => {
-                window.location.href = '../login/login.html';
-            }, 2000);
-        } else {
-            throw new Error(data.message || 'Erro ao realizar registro');
+        if (userExists) {
+            throw new Error('Usuário ou email já existe');
         }
+
+        // Criar novo usuário
+        const newUser = {
+            id: Date.now(),
+            username: userData.nome,
+            email: userData.email,
+            password: userData.password // Em produção, deve ser hash
+        };
+
+        existingUsers.push(newUser);
+        localStorage.setItem('users', JSON.stringify(existingUsers));
+
+        // Gerar token simples
+        const token = btoa(JSON.stringify({ id: newUser.id, email: newUser.email }));
+
+        showSuccess('Registro realizado com sucesso! Redirecionando para login...');
+
+        // Salvar token e dados do usuário
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('user', JSON.stringify({ id: newUser.id, username: newUser.username, email: newUser.email }));
+
+        // Redirecionar para a página de login após 2 segundos
+        setTimeout(() => {
+            window.location.href = '../login/login.html';
+        }, 2000);
     } catch (error) {
         console.error('Erro no registro:', error);
-        
+
         // Mensagens de erro específicas
         if (error.message.includes('Usuário ou email já existe')) {
-            showError('email', 'Este email ou nome de usuário já está em uso.');
-        } else if (error.message.includes('NetworkError')) {
-            showError('form', 'Erro de conexão. Verifique se o servidor está rodando.');
+            showError('email', 'Este email já está em uso.');
         } else {
             showError('form', error.message || 'Erro ao realizar registro. Tente novamente.');
         }

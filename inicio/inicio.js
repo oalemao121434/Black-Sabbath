@@ -17,13 +17,15 @@ class BlackSabbathCosmos {
         document.querySelector('.loading-screen').remove();
     }
 
+
+
     async loadProducts() {
         try {
-            // Carregar planetas do db.json local
-            const response = await fetch('../json/db.json');
-            const data = await response.json();
-            // Ajustar para usar a chave correta do JSON "planetas"
-            this.products = data.planetas.map(p => ({
+            // Carregar planetas do JSON Server
+            const response = await fetch('http://localhost:3000/planetas');
+            const produtos = await response.json();
+            // Mapear para produtos
+            this.products = produtos.map(p => ({
                 id: p.id,
                 name: p.nome,
                 description: p.descricao,
@@ -132,5 +134,5 @@ class BlackSabbathCosmos {
 
 // Inicializar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
-    window.cosmos = new BlackSabbathCosmos();
+    const cosmos = new BlackSabbathCosmos();
 });

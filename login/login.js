@@ -37,54 +37,49 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 async function loginUser(userData) {
     const button = document.querySelector('.submit-btn');
     const originalText = button.querySelector('.btn-text').textContent;
-    
+
     // Show loading state
     button.classList.add('loading');
     button.disabled = true;
 
     try {
-        const response = await fetch(`${API_BASE_URL}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: userData.email,
-                password: userData.password
-            })
-        });
+        // Simular delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
-        const data = await response.json();
+        // Buscar usuários do localStorage
+        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        const user = existingUsers.find(u => u.email === userData.email && u.password === userData.password);
 
-        if (response.ok) {
-            showSuccess('Login realizado com sucesso! Redirecionando...');
-            
-            // Salvar token e dados do usuário
-            if (data.data && data.data.token) {
-                localStorage.setItem('authToken', data.data.token);
-                localStorage.setItem('user', JSON.stringify(data.data.user));
-                
-                // Se "Lembrar de mim" estiver marcado, salvar por mais tempo
-                if (userData.rememberMe) {
-                    localStorage.setItem('rememberMe', 'true');
-                }
-            }
-            
-            // Redirecionar para a página inicial após 1.5 segundos
-            setTimeout(() => {
-                window.location.href = '../inicio/inicio.html';
-            }, 1500);
-        } else {
-            throw new Error(data.message || 'Erro ao realizar login');
+        if (!user) {
+            throw new Error('Credenciais inválidas');
         }
+
+        // Gerar token simples
+        const token = btoa(JSON.stringify({ id: user.id, email: user.email }));
+
+        showSuccess('Login realizado com sucesso! Redirecionando...');
+
+        // Salvar token e dados do usuário
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('user', JSON.stringify({ id: user.id, username: user.username, email: user.email }));
+
+        // Se "Lembrar de mim" estiver marcado, salvar por mais tempo
+        if (userData.rememberMe) {
+            localStorage.setItem('rememberMe', 'true');
+        } else {
+            localStorage.removeItem('rememberMe');
+        }
+
+        // Redirecionar para a página inicial após 1.5 segundos
+        setTimeout(() => {
+            window.location.href = '../inicio/inicio.html';
+        }, 1500);
     } catch (error) {
         console.error('Erro no login:', error);
-        
+
         // Mensagens de erro específicas
         if (error.message.includes('Credenciais inválidas')) {
             showError('form', 'Email ou senha incorretos. Tente novamente.');
-        } else if (error.message.includes('NetworkError')) {
-            showError('form', 'Erro de conexão. Verifique se o servidor está rodando.');
         } else {
             showError('form', error.message || 'Erro ao realizar login. Tente novamente.');
         }
