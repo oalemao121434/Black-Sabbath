@@ -24,11 +24,6 @@
     </div>
 
     <header>
-        <!-- Imagem acima da navbar -->
-        <div class="header-image">
-            <img src="../imgs/espaço-sideral.jpg" alt="Espaço Sideral" />
-        </div>
-        
         <!-- Navbar estilizada -->
         <div class="navbar-container">
             <div class="container header-container">
@@ -57,12 +52,19 @@
                     <span class="title-sub">COM BLACK SABBATH</span>
                 </h1>
                 <p class="hero-description">
-                    Descubra artefatos intergalácticos e tecnologia estelar
+                    Descubra artefatos intergalácticos e tecnologia estelar das civilizações mais avançadas do universo
                 </p>
                 <a href="#produtos" class="btn-primary">
                     <i class="fas fa-rocket"></i>
                     INICIAR EXPLORAÇÃO
                 </a>
+            </div>
+            <div class="hero-stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
             </div>
         </section>
 
@@ -72,13 +74,58 @@
                 <div class="section-header">
                     <h2 class="section-title">
                         <i class="fas fa-meteor"></i>
-                        Artefatos Cósmicos
+                        Planetas & Artefatos Cósmicos
                     </h2>
-                    <p class="section-subtitle">Tecnologia de civilizações distantes</p>
+                    <p class="section-subtitle">Tecnologia de civilizações distantes e mundos inexplorados</p>
                 </div>
 
-                <div class="product-grid" id="product-grid">
-                    <!-- Produtos serão carregados via JavaScript -->
+                <div class="carousel-container">
+                    <div class="carousel" id="products-carousel">
+                        <button class="carousel-btn prev-btn" onclick="cosmos.prevSlide()">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="carousel-track" id="carousel-track">
+                            <!-- Produtos serão carregados via JavaScript -->
+                        </div>
+                        
+                        <button class="carousel-btn next-btn" onclick="cosmos.nextSlide()">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="carousel-indicators" id="carousel-indicators">
+                        <!-- Indicadores serão gerados via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Entrega Interestelar</h3>
+                        <p>Entrega rápida em todo o sistema solar</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Garantia Cósmica</h3>
+                        <p>Proteção contra anomalias espaciais</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Suporte 24/7</h3>
+                        <p>Atendimento em todos os fusos horários galácticos</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -92,20 +139,22 @@
                     BLACK SABBATH COSMOS
                 </div>
                 <p class="footer-description">
-                    Sua porta de entrada para o universo.
+                    Sua porta de entrada para o universo e além.
                 </p>
             </div>
             <div class="footer-links">
                 <a href="#">Sobre Nós</a>
                 <a href="#">Termos de Uso</a>
+                <a href="#">Política Cósmica</a>
             </div>
             <div class="footer-social">
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 BLACK SABBATH COSMOS.</p>
+                <p>&copy; 2024 BLACK SABBATH COSMOS. Todos os direitos intergalácticos reservados.</p>
             </div>
         </div>
     </footer>
