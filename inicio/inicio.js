@@ -1,9 +1,6 @@
 class BlackSabbathCosmos {
     constructor() {
         this.products = [];
-        this.currentSlide = 0;
-        this.slidesToShow = 3;
-        this.autoRotateInterval = null;
         this.init();
     }
 
@@ -11,7 +8,6 @@ class BlackSabbathCosmos {
         await this.setupLoadingScreen();
         await this.loadProducts();
         this.setupEventListeners();
-        this.updateSlidesToShow();
         console.log('🌌 BLACK SABBATH COSMOS - Sistema Inicializado');
     }
 
@@ -24,28 +20,26 @@ class BlackSabbathCosmos {
 
     async loadProducts() {
         try {
-            // Carregar planetas do JSON Server
-            const response = await fetch('http://localhost:3000/planetas');
-            const produtos = await response.json();
-            
-            // Mapear para produtos
-            this.products = produtos.map(p => ({
-                id: p.id,
-                name: p.nome,
-                description: p.descricao,
-                price: p.preco_usd,
-                image: p.imagens[0] || this.getFallbackImage(),
-                category: p.categoria || 'Artefato Cósmico'
+            const response = await fetch('../json/db.json');
+            const data = await response.json();
+            const produtos = data.planetos;
+
+            this.products = produtos.map(produto => ({
+                id: produto.id,
+                nome: produto.nome,
+                categoria: produto.categoria,
+                descricao: produto.descricao,
+                preco: produto.preco,
+                moeda: produto.moeda,
+                imagem: produto.imagem,
+                estoque: produto.estoque,
+                destaque: produto.destaque,
+                tags: produto.tags
             }));
-            
+
             this.renderProducts();
-            this.startAutoRotate();
         } catch (error) {
-            console.error('Erro ao carregar planetas:', error);
-            // Fallback para produtos locais
-            this.products = this.getFallbackProducts();
-            this.renderProducts();
-            this.startAutoRotate();
+            console.error('Erro ao carregar produtos:', error);
         }
     }
 
@@ -113,102 +107,32 @@ class BlackSabbathCosmos {
     }
 
     renderProducts() {
-        const track = document.getElementById('carousel-track');
-        const indicators = document.getElementById('carousel-indicators');
-        
-        if (!track || !indicators) return;
+        const container = document.getElementById('produtos-container');
+        container.innerHTML = '';
 
-        // Renderizar slides
-        track.innerHTML = this.products.map(product => `
-            <div class="carousel-slide">
-                <div class="card" onclick="cosmos.viewProduct(${product.id})">
-                    <img src="${product.image}" alt="${product.name}" class="card-image">
-                    <div class="card-content">
-                        <h3>${product.name}</h3>
-                        <p>${product.description}</p>
-                        <span class="price">$ ${product.price.toLocaleString()}</span>
-                        <button class="btn" onclick="event.stopPropagation(); cosmos.addToCart(${product.id})">
-                            <i class="fas fa-shopping-cart"></i>
-                            Adquirir Artefato
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `).join('');
+        this.products.forEach(produto => {
+            const card = document.createElement("div");
+            card.classList.add("card");
 
-        // Renderizar indicadores
-        indicators.innerHTML = this.products.map((_, index) => `
-            <span class="indicator ${index === 0 ? 'active' : ''}" onclick="cosmos.goToSlide(${index})"></span>
-        `).join('');
+            card.innerHTML = `
+                <img src="${produto.imagem}" alt="${produto.nome}">
+                <h3>${produto.nome}</h3>
+                <p>${produto.descricao}</p>
+                <span class="price">R$ ${produto.preco.toFixed(2)}</span><br>
+                <a href="#" class="btn">Comprar</a>
+            `;
 
-        this.updateCarousel();
-    }
-
-    updateSlidesToShow() {
-        const width = window.innerWidth;
-        if (width < 768) {
-            this.slidesToShow = 1;
-        } else if (width < 1024) {
-            this.slidesToShow = 2;
-        } else {
-            this.slidesToShow = 3;
-        }
-        this.updateCarousel();
-    }
-
-    nextSlide() {
-        const maxSlide = Math.max(0, this.products.length - this.slidesToShow);
-        this.currentSlide = (this.currentSlide + 1) % (maxSlide + 1);
-        this.updateCarousel();
-    }
-
-    prevSlide() {
-        const maxSlide = Math.max(0, this.products.length - this.slidesToShow);
-        this.currentSlide = (this.currentSlide - 1 + (maxSlide + 1)) % (maxSlide + 1);
-        this.updateCarousel();
-    }
-
-    goToSlide(index) {
-        const maxSlide = Math.max(0, this.products.length - this.slidesToShow);
-        this.currentSlide = Math.min(index, maxSlide);
-        this.updateCarousel();
-    }
-
-    updateCarousel() {
-        const track = document.querySelector('.carousel-track');
-        const indicators = document.querySelectorAll('.indicator');
-        
-        if (!track) return;
-
-        const slideWidth = 100 / this.slidesToShow;
-        const translateX = -this.currentSlide * slideWidth;
-        track.style.transform = `translateX(${translateX}%)`;
-
-        // Update indicators
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === this.currentSlide);
+            container.appendChild(card);
         });
     }
 
-    startAutoRotate() {
-        this.stopAutoRotate();
-        this.autoRotateInterval = setInterval(() => {
-            this.nextSlide();
-        }, 5000);
-    }
 
-    stopAutoRotate() {
-        if (this.autoRotateInterval) {
-            clearInterval(this.autoRotateInterval);
-            this.autoRotateInterval = null;
-        }
-    }
 
     viewProduct(productId) {
         const product = this.products.find(p => p.id === productId);
         if (product) {
             // Aqui você pode implementar a navegação para a página do produto
-            this.showNotification(`Visualizando ${product.name}`);
+            this.showNotification(`Visualizando ${product.nome}`);
             console.log('Visualizando produto:', product);
         }
     }
@@ -218,7 +142,7 @@ class BlackSabbathCosmos {
         if (!product) return;
 
         // Simular adição ao carrinho
-        this.showNotification(`🚀 ${product.name} adicionado ao carrinho!`);
+        this.showNotification(`🚀 ${product.nome} adicionado ao carrinho!`);
         
         // Animação do botão
         const button = event.target;
@@ -294,18 +218,6 @@ class BlackSabbathCosmos {
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        });
-
-        // Pause auto-rotate on hover
-        const carousel = document.querySelector('.carousel');
-        if (carousel) {
-            carousel.addEventListener('mouseenter', () => this.stopAutoRotate());
-            carousel.addEventListener('mouseleave', () => this.startAutoRotate());
-        }
-
-        // Responsividade
-        window.addEventListener('resize', () => {
-            this.updateSlidesToShow();
         });
     }
 }
