@@ -20,6 +20,32 @@ class BlackSabbathCosmos {
 
     async loadProducts() {
         try {
+            const response = await fetch('http://localhost:3000/planetas');
+            const produtos = await response.json();
+
+            this.products = produtos.map(produto => ({
+                id: produto.id,
+                nome: produto.nome,
+                categoria: produto.categoria,
+                descricao: produto.descricao,
+                preco: produto.preco,
+                moeda: produto.moeda,
+                imagem: produto.imagem,
+                estoque: produto.estoque,
+                destaque: produto.destaque,
+                tags: produto.tags
+            }));
+
+            this.renderProducts();
+        } catch (error) {
+            console.error('Erro ao carregar produtos:', error);
+            // Fallback para produtos locais se o servidor não estiver disponível
+            this.loadFallbackProducts();
+        }
+    }
+
+    async loadFallbackProducts() {
+        try {
             const response = await fetch('../json/db.json');
             const data = await response.json();
             const produtos = data.planetos;
@@ -38,8 +64,10 @@ class BlackSabbathCosmos {
             }));
 
             this.renderProducts();
-        } catch (error) {
-            console.error('Erro ao carregar produtos:', error);
+        } catch (fallbackError) {
+            console.error('Erro no fallback:', fallbackError);
+            this.products = this.getFallbackProducts();
+            this.renderProducts();
         }
     }
 
@@ -113,13 +141,14 @@ class BlackSabbathCosmos {
         this.products.forEach(produto => {
             const card = document.createElement("div");
             card.classList.add("card");
+            card.setAttribute('data-product-id', produto.id);
 
             card.innerHTML = `
-                <img src="${produto.imagem}" alt="${produto.nome}">
+                <img src="${produto.imagem}" alt="${produto.nome}" loading="lazy">
                 <h3>${produto.nome}</h3>
                 <p>${produto.descricao}</p>
                 <span class="price">R$ ${produto.preco.toFixed(2)}</span><br>
-                <a href="#" class="btn">Comprar</a>
+                <button class="btn" onclick="window.cosmos.addToCart(${produto.id})">Comprar</button>
             `;
 
             container.appendChild(card);
