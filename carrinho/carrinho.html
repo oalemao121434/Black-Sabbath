@@ -33,8 +33,35 @@
     <main>
         <div class="container">
             <h1>Carrinho de Compras</h1>
-            <p>Seu carrinho está vazio.</p>
+            <div id="cart-container">
+                <div id="empty-cart">
+                    <p>Seu carrinho está vazio.</p>
+                    <a href="../inicio/inicio.html" class="btn">Continuar Comprando</a>
+                </div>
+                <div id="cart-items" style="display: none;">
+                    <div class="cart-table">
+                        <div class="cart-header">
+                            <span>Produto</span>
+                            <span>Preço</span>
+                            <span>Quantidade</span>
+                            <span>Subtotal</span>
+                            <span>Ações</span>
+                        </div>
+                        <div id="cart-items-list"></div>
+                    </div>
+                    <div class="cart-summary">
+                        <div class="cart-total">
+                            <strong>Total: R$ <span id="cart-total">0,00</span></strong>
+                        </div>
+                        <div class="cart-actions">
+                            <a href="../inicio/inicio.html" class="btn-secondary">Continuar Comprando</a>
+                            <button class="btn" id="checkout-btn">Finalizar Compra</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
+    <script src="carrinho.js"></script>
 </body>
 </html>
