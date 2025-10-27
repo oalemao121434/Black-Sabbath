@@ -1,4 +1,18 @@
-- [x] Modificar registrar/registro.js para usar localStorage ao invés de API
-- [ ] Modificar login/login.js para verificar credenciais no localStorage
-- [ ] Gerar token simples para autenticação
-- [ ] Testar registro e login
+- [x] Hardcode product cards in inicio/inicio.html
+- [x] Remove dynamic product loading and rendering from inicio/inicio.js
+- [x] Test the hardcoded cards display correctly
+- [x] Develop shopping cart functionality in carrinho/carrinho.html
+- [x] Add cart display structure (items, quantities, totals)
+- [x] Implement JavaScript for cart management (load, update, remove)
+- [x] Add cart-specific CSS styles
+- [x] Test cart functionality (add, view, update, remove)
+- [x] Add redirect to cart page after adding product
+- [x] Remove cart buttons from product cards
+- [x] Create wish list page structure in lista de desejos/lista.html
+- [x] Add wish list display structure (items, remove actions)
+- [x] Implement JavaScript for wish list management (load, add, remove)
+- [x] Add wish list-specific CSS styles in lista de desejos/lista.css
+- [x] Add "Add to Wish List" button to product cards in inicio/inicio.html
+- [x] Implement addToWishList method in inicio/inicio.js
+- [x] Update navigation in all pages to include Lista de Desejos link
+- [x] Test wish list functionality (add, view, remove)

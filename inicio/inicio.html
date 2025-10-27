@@ -9,20 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- tela de login -->
-    <div class="loading-screen">
-        <div class="loading-content">
-            <div class="planet-loader">
-                <div class="orbit">
-                    <div class="moon"></div>
-                </div>
-                <div class="planet"></div>
-            </div>
-            <h2>BLACK SABBATH COSMOS</h2>
-            <p>Inicializando sistema...</p>
-        </div>
-    </div>
-
     <header>
         <!-- navbar estilizada -->
         <div class="navbar-container">
@@ -36,8 +22,9 @@
                         <li><a href="../inicio/inicio.html">Início</a></li>
                         <li><a href="../login/login.html">Login</a></li>
                         <li><a href="../registrar/registro.html">Registrar</a></li>
-                        <li><a href="../carrinho/carrinho.html">Carrinho</a></li>
-                    </ul>
+                    <li><a href="../carrinho/carrinho.html">Carrinho</a></li>
+                    <li><a href="../lista de desejos/lista.html">Lista de Desejos</a></li>
+                </ul>
                 </nav>
             </div>
         </div>
@@ -80,7 +67,127 @@
                 </div>
 
                 <div class="container" id="produtos-container">
-                    <!-- os cards serão inseridos aqui pelo JS -->
+                    <!-- Product Cards Hardcoded -->
+                    <div class="card" data-product-id="1">
+                        <img src="https://via.placeholder.com/800x500?text=Aurélia+Prime" alt="Aurélia Prime" loading="lazy">
+                        <h3>Aurélia Prime</h3>
+                        <p>Planeta rochoso com atmosfera respirável e mares de cor esmeralda. Ideal para colonização inicial.</p>
+                        <span class="price">R$ 1299000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(1)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(1)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="2">
+                        <img src="https://via.placeholder.com/800x500?text=Zyphos+IX" alt="Zyphos IX" loading="lazy">
+                        <h3>Zyphos IX</h3>
+                        <p>Planeta com anéis minerais raros utilizados em tecnologia avançada.</p>
+                        <span class="price">R$ 2590000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(2)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(2)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="3">
+                        <img src="https://via.placeholder.com/800x500?text=Neru+V" alt="Neru V" loading="lazy">
+                        <h3>Neru V</h3>
+                        <p>Superfície congelada com enormes reservas de água pura, excelente para extração.</p>
+                        <span class="price">R$ 450000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(3)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(3)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="4">
+                        <img src="https://via.placeholder.com/800x500?text=Thalassa+Azul" alt="Thalassa Azul" loading="lazy">
+                        <h3>Thalassa Azul</h3>
+                        <p>Coberto por oceanos profundos e ricos em vida marinha exótica. Excelente para turismo e pesquisa.</p>
+                        <span class="price">R$ 1750000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(4)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(4)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="5">
+                        <img src="https://via.placeholder.com/800x500?text=Cinder-3" alt="Cinder-3" loading="lazy">
+                        <h3>Cinder-3</h3>
+                        <p>Planeta ativo com vastas reservas de metais fundidos. Ideal para indústrias pesadas.</p>
+                        <span class="price">R$ 820000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(5)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(5)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="6">
+                        <img src="https://via.placeholder.com/800x500?text=Deriva+Elísia" alt="Deriva Elísia" loading="lazy">
+                        <h3>Deriva Elísia</h3>
+                        <p>Clima equilibrado, auroras constantes e ecossistemas exuberantes. Destino ideal para resorts de luxo.</p>
+                        <span class="price">R$ 2199000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(6)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(6)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="7">
+                        <img src="https://via.placeholder.com/800x500?text=Anel+Obsidiano" alt="Anel Obsidiano" loading="lazy">
+                        <h3>Anel Obsidiano</h3>
+                        <p>Conjunto de corpos rochosos ricos em obsidiana e metais raros. Ótimo para mineração espacial.</p>
+                        <span class="price">R$ 320000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(7)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(7)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="8">
+                        <img src="https://via.placeholder.com/800x500?text=Verdantia+Maior" alt="Verdantia Maior" loading="lazy">
+                        <h3>Verdantia Maior</h3>
+                        <p>Planeta coberto por florestas densas e plantas biofluorescentes. Ideal para estudos biológicos.</p>
+                        <span class="price">R$ 980000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(8)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(8)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="9">
+                        <img src="https://via.placeholder.com/800x500?text=Kairo-2" alt="Kairo-2" loading="lazy">
+                        <h3>Kairo-2</h3>
+                        <p>Planeta árido com cristais fotossensíveis ideais para geração de energia solar.</p>
+                        <span class="price">R$ 610000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(9)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(9)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="10">
+                        <img src="https://via.placeholder.com/800x500?text=Halo+Lumina" alt="Halo Lumina" loading="lazy">
+                        <h3>Halo Lumina</h3>
+                        <p>Planeta raro com cristais que emitem luz e campo magnético instável. Indicado para pesquisa avançada.</p>
+                        <span class="price">R$ 3490000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(10)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(10)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="11">
+                        <img src="https://via.placeholder.com/800x500?text=Eco+Menor" alt="Eco Menor" loading="lazy">
+                        <h3>Eco Menor</h3>
+                        <p>Pequena lua ideal para bases militares ou observatórios discretos.</p>
+                        <span class="price">R$ 190000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(11)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(11)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                    <div class="card" data-product-id="12">
+                        <img src="https://via.placeholder.com/800x500?text=Nova+Eterna" alt="Nova Eterna" loading="lazy">
+                        <h3>Nova Eterna</h3>
+                        <p>Planeta envolto em luz constante. Visual espetacular e energia natural abundante.</p>
+                        <span class="price">R$ 2890000.00</span><br>
+                        <button class="btn" onclick="window.cosmos.addToCart(12)">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToWishList(12)">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
