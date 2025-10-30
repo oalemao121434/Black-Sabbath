@@ -36,8 +36,8 @@ document.getElementById('registroForm').addEventListener('submit', async functio
     if (!password) {
         showError('password', 'Senha é obrigatória.');
         isValid = false;
-    } else if (password.length < 6) {
-        showError('password', 'A senha deve ter pelo menos 6 caracteres.');
+    } else if (!isValidPassword(password)) {
+        showError('password', 'A senha deve ter entre 8 e 20 caracteres, incluindo pelo menos uma letra maiúscula, um número e um caractere especial.');
         isValid = false;
     }
 
@@ -144,6 +144,26 @@ async function registerUser(userData) {
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+}
+
+function isValidPassword(password) {
+    // Pelo menos 8 caracteres, no máximo 20
+    if (password.length < 8 || password.length > 20) {
+        return false;
+    }
+    // Pelo menos uma letra maiúscula
+    if (!/[A-Z]/.test(password)) {
+        return false;
+    }
+    // Pelo menos um número
+    if (!/\d/.test(password)) {
+        return false;
+    }
+    // Pelo menos um caractere especial
+    if (!/[^a-zA-Z\d]/.test(password)) {
+        return false;
+    }
+    return true;
 }
 
 function showError(fieldId, message) {

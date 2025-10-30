@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perfil do Usuário - BLACK SABBATH Cosmos</title>
+    <link rel="stylesheet" href="usuario.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <!-- navbar estilizada -->
+        <div class="navbar-container">
+            <div class="container header-container">
+                <div class="logo">
+                    <span class="logo-icon">🌌</span>
+                    BLACK SABBATH COSMOS
+                </div>
+                <nav class="navbar">
+                    <ul class="nav-links">
+                        <li><a href="../inicio/inicio.html">Início</a></li>
+                        <li><a href="../login/login.html">Login</a></li>
+                        <li><a href="../registrar/registro.html">Registrar</a></li>
+                        <li><a href="../carrinho/carrinho.html">Carrinho</a></li>
+                        <li><a href="../lista de desejos/lista.html">Lista de Desejos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="user-profile">
+            <div class="container">
+                <div class="profile-header">
+                    <h1 class="profile-title">
+                        <i class="fas fa-user-astronaut"></i>
+                        Perfil do Usuário
+                    </h1>
+                    <p class="profile-subtitle">Gerencie suas informações e configurações</p>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="user-name">Carregando...</h2>
+                        <p id="user-email">Carregando...</p>
+                        <p class="user-id">ID: <span id="user-id">Carregando...</span></p>
+                    </div>
+                    <div class="profile-actions">
+                        <button id="logout-btn" class="btn-logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Deslogar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-icon">🌌</span>
+                    BLACK SABBATH COSMOS
+                </div>
+                <p class="footer-description">
+                    Sua porta de entrada para o universo e além.
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Sobre Nós</a>
+                <a href="#">Termos de Uso</a>
+                <a href="#">Política de Uso</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 BLACK SABBATH COSMOS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="usuario.js"></script>
+</body>
+</html>

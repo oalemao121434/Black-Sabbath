@@ -5,6 +5,7 @@ class BlackSabbathCosmos {
 
     async init() {
         await this.setupLoadingScreen();
+        await this.loadProductData();
         this.setupEventListeners();
         console.log('🌌 BLACK SABBATH COSMOS - Sistema Inicializado');
     }
@@ -121,6 +122,108 @@ class BlackSabbathCosmos {
             notification.style.transform = 'translateX(100%)';
             setTimeout(() => notification.remove(), 300);
         }, 3000);
+    }
+
+    async loadProductData() {
+        try {
+            const response = await fetch('../json/db.json');
+            const data = await response.json();
+            this.productData = data.planetas;
+            console.log('📊 Dados dos produtos carregados:', this.productData.length, 'produtos');
+        } catch (error) {
+            console.error('Erro ao carregar dados dos produtos:', error);
+            this.productData = [];
+        }
+    }
+
+    showDetails(productId) {
+        if (!this.productData) {
+            this.showNotification('⏳ Carregando dados dos produtos...');
+            return;
+        }
+
+        const product = this.productData.find(p => p.id === productId);
+        if (!product) {
+            this.showNotification('❌ Produto não encontrado!');
+            return;
+        }
+
+        // Criar modal usando classes CSS
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+
+        modal.innerHTML = `
+            <div class="modal-content">
+                <button class="modal-close">×</button>
+
+                <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                    <img src="../imagens/planeta-${product.id}.jpg" alt="${product.nome}" style="
+                        width: 200px;
+                        height: 200px;
+                        object-fit: cover;
+                        border-radius: 15px;
+                        border: 2px solid var(--primary);
+                    ">
+                    <div style="flex: 1;">
+                        <h2 style="color: var(--primary); margin-bottom: 10px; font-size: 1.8rem;">${product.nome}</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.6;">${product.descricao}</p>
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <span style="background: var(--gradient-gold); color: var(--dark); padding: 5px 12px; border-radius: 20px; font-weight: 600;">${product.categoria}</span>
+                            ${product.destaque ? '<span style="background: var(--gradient-accent); color: var(--text); padding: 5px 12px; border-radius: 20px; font-weight: 600;">⭐ Destaque</span>' : ''}
+                        </div>
+                        <p style="font-size: 1.5rem; color: var(--accent); font-weight: 700;">R$ ${product.preco.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <i class="fas fa-ruler-combined" style="color: var(--accent); font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Diâmetro</div>
+                        <div style="font-weight: 600; color: var(--text);">${product.diametro_km.toLocaleString()} km</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <i class="fas fa-weight-hanging" style="color: var(--accent); font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Massa</div>
+                        <div style="font-weight: 600; color: var(--text);">${product.massa_terras} Terras</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <i class="fas fa-route" style="color: var(--accent); font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Distância</div>
+                        <div style="font-weight: 600; color: var(--text);">${product.distancia_anos_luz} anos-luz</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <i class="fas fa-boxes" style="color: var(--accent); font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Estoque</div>
+                        <div style="font-weight: 600; color: var(--text);">${product.estoque} unidades</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;">Características:</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        ${product.tags.map(tag => `<span style="background: var(--gradient-accent); color: var(--text); padding: 4px 10px; border-radius: 15px; font-size: 0.85rem;">${tag}</span>`).join('')}
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button onclick="window.cosmos.addToWishList(${product.id}); this.closest('.modal-overlay').remove()" class="btn-secondary" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-heart"></i> Lista de Desejos
+                    </button>
+                    <button onclick="window.cosmos.addToCart(${product.id}); this.closest('.modal-overlay').remove()" class="btn" style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-shopping-cart"></i> Comprar
+                    </button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        // Fechar modal ao clicar fora ou no botão X
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.classList.contains('modal-close')) {
+                modal.remove();
+            }
+        });
     }
 
     setupEventListeners() {
