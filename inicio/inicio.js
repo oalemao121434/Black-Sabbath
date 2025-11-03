@@ -22,8 +22,10 @@ class BlackSabbathCosmos {
 
 
     addToCart(productId) {
-        // Simular adição ao carrinho
-        this.showNotification(`🚀 Produto ${productId} adicionado ao carrinho!`);
+        if (!this.productData || this.productData.length === 0) {
+            this.showNotification('⏳ Carregando produtos...');
+            return;
+        }
 
         // Animação do botão
         const button = event.target;
@@ -38,7 +40,7 @@ class BlackSabbathCosmos {
             button.disabled = false;
         }, 2000);
 
-        // Aqui você pode adicionar a lógica real para adicionar ao carrinho
+        // Salvar no carrinho
         this.saveToCart(productId);
 
         // Redirecionar para a página do carrinho
@@ -69,8 +71,13 @@ class BlackSabbathCosmos {
     }
 
     saveToCart(productId) {
-        // Simular salvamento no localStorage - criar objeto produto básico
-        const product = { id: productId, nome: `Produto ${productId}`, preco: 1000 }; // Placeholder, pode ser expandido
+        // Buscar dados do produto do JSON
+        const product = this.productData.find(p => p.id === productId);
+        if (!product) {
+            this.showNotification('❌ Produto não encontrado!');
+            return;
+        }
+
         let cart = JSON.parse(localStorage.getItem('blackSabbathCart') || '[]');
         const existingItem = cart.find(item => item.id === product.id);
 
@@ -78,12 +85,16 @@ class BlackSabbathCosmos {
             existingItem.quantity += 1;
         } else {
             cart.push({
-                ...product,
+                id: product.id,
+                nome: product.nome,
+                preco: product.preco,
+                imagem: product.imagem,
                 quantity: 1
             });
         }
 
         localStorage.setItem('blackSabbathCart', JSON.stringify(cart));
+        this.showNotification(`🚀 ${product.nome} adicionado ao carrinho!`);
     }
 
     saveToWishList(productId) {
@@ -126,9 +137,9 @@ class BlackSabbathCosmos {
 
     async loadProductData() {
         try {
-            const response = await fetch('../json/db.json');
+            const response = await fetch('http://localhost:3000/planetas');
             const data = await response.json();
-            this.productData = data.planetas;
+            this.productData = data;
             console.log('📊 Dados dos produtos carregados:', this.productData.length, 'produtos');
         } catch (error) {
             console.error('Erro ao carregar dados dos produtos:', error);

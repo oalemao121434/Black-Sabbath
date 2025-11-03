@@ -15,9 +15,9 @@ class CarrinhoCosmos {
 
     async loadProducts() {
         try {
-            const response = await fetch('../json/db.json');
+            const response = await fetch('http://localhost:3000/planetas');
             const data = await response.json();
-            this.products = data.planetas;
+            this.products = data;
         } catch (error) {
             console.error('Erro ao carregar produtos:', error);
         }
@@ -56,23 +56,20 @@ class CarrinhoCosmos {
         let total = 0;
 
         this.cart.forEach(item => {
-            const product = this.getProductById(item.id);
-            if (!product) return;
-
-            const subtotal = product.preco * item.quantity;
+            const subtotal = item.preco * item.quantity;
             total += subtotal;
 
             const itemElement = document.createElement('div');
             itemElement.className = 'cart-item';
             itemElement.innerHTML = `
                 <div class="cart-item-info">
-                    <img src="${product.imagem}" alt="${product.nome}" class="cart-item-image">
+                    <img src="${item.imagem}" alt="${item.nome}" class="cart-item-image">
                     <div class="cart-item-details">
-                        <h4>${product.nome}</h4>
-                        <p>${product.descricao.substring(0, 100)}...</p>
+                        <h4>${item.nome}</h4>
+                        <p>Produto adicionado ao carrinho</p>
                     </div>
                 </div>
-                <div class="cart-item-price">R$ ${product.preco.toLocaleString('pt-BR')}</div>
+                <div class="cart-item-price">R$ ${item.preco.toLocaleString('pt-BR')}</div>
                 <div class="cart-item-quantity">
                     <button class="quantity-btn" data-action="decrease" data-id="${item.id}">-</button>
                     <span>${item.quantity}</span>

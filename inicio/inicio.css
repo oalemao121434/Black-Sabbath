@@ -347,7 +347,7 @@ main {
 
 /* Cards */
 .card {
-    width: calc(33.333% - 20px);
+    width: calc(50% - 20px);
     min-width: 320px;
     max-width: 380px;
     border: 2px solid rgba(255, 204, 0, 0.2);
