@@ -6,8 +6,45 @@ class BlackSabbathCosmos {
     async init() {
         await this.setupLoadingScreen();
         await this.loadProductData();
+        this.renderProductCards();
         this.setupEventListeners();
         console.log('🌌 BLACK SABBATH COSMOS - Sistema Inicializado');
+    }
+
+    renderProductCards() {
+        const container = document.getElementById('produtos-container');
+        if (!this.productData || this.productData.length === 0) {
+            container.innerHTML = '<p>Carregando produtos...</p>';
+            return;
+        }
+
+        container.innerHTML = '';
+
+        this.productData.forEach(planeta => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.setAttribute('data-product-id', planeta.id);
+
+            card.innerHTML = `
+                <div class="card-content">
+                    <div class="card-image-container">
+                        <img src="${planeta.imagem}" alt="${planeta.nome}" loading="lazy">
+                        <div class="card-image-overlay"></div>
+                    </div>
+                    <h3>${planeta.nome}</h3>
+                    <p>${planeta.descricao}</p>
+                    <span class="price">${planeta.preco.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+                    <div class="card-buttons">
+                        <button class="btn" onclick="window.cosmos.addToCart(${planeta.id})">Comprar</button>
+                        <button class="btn-secondary" onclick="window.cosmos.addToWishList(${planeta.id})">
+                            <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(card);
+        });
     }
 
     async setupLoadingScreen() {
@@ -143,7 +180,16 @@ class BlackSabbathCosmos {
             console.log('📊 Dados dos produtos carregados:', this.productData.length, 'produtos');
         } catch (error) {
             console.error('Erro ao carregar dados dos produtos:', error);
-            this.productData = [];
+            // Fallback para dados locais se o servidor não estiver disponível
+            try {
+                const localResponse = await fetch('./json/db.json');
+                const localData = await localResponse.json();
+                this.productData = localData.planetas;
+                console.log('📊 Dados locais carregados:', this.productData.length, 'produtos');
+            } catch (localError) {
+                console.error('Erro ao carregar dados locais:', localError);
+                this.productData = [];
+            }
         }
     }
 
