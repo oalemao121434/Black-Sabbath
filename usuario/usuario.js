@@ -32,15 +32,11 @@ document.getElementById('logout-btn').addEventListener('click', function() {
 });
 
 function logoutUser() {
-    // Confirmar se o usuário quer deslogar
-    if (confirm('Tem certeza que deseja deslogar?')) {
-        // Remover dados do localStorage
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('user');
-        localStorage.removeItem('rememberMe');
+    // Remover dados do localStorage
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+    localStorage.removeItem('rememberMe');
 
-        // Redirecionar para a página de login
-        alert('Deslogado com sucesso!');
-        window.location.href = '../login/login.html';
-    }
+    // Redirecionar diretamente para a página de login
+    window.location.href = '../login/login.html';
 }

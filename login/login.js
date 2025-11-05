@@ -169,18 +169,23 @@ function clearMessages() {
 document.querySelectorAll('input').forEach(input => {
     input.addEventListener('blur', function() {
         const value = this.value.trim();
-        
+
         if (value && this.id === 'email' && !isValidEmail(value)) {
             showError('email', 'Por favor, insira um email válido.');
         }
     });
-    
+
     input.addEventListener('input', function() {
         // Clear error when user starts typing
         const error = this.parentNode.querySelector('.error-message');
         if (error) {
             error.remove();
             this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+        }
+
+        // Save input value to sessionStorage
+        if (this.id === 'email') {
+            sessionStorage.setItem('loginEmail', this.value);
         }
     });
 });
@@ -201,13 +206,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const remembered = localStorage.getItem('rememberMe');
     if (remembered === 'true') {
         document.getElementById('rememberMe').checked = true;
-        
+
         // Tentar preencher automaticamente se houver dados salvos
         const savedUser = localStorage.getItem('user');
         if (savedUser) {
             const user = JSON.parse(savedUser);
             document.getElementById('email').value = user.email || '';
         }
+    }
+
+    // Restore saved values from sessionStorage
+    const savedEmail = sessionStorage.getItem('loginEmail');
+    if (savedEmail && !document.getElementById('email').value) {
+        document.getElementById('email').value = savedEmail;
     }
 });
 

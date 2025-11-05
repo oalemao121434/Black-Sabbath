@@ -215,22 +215,29 @@ function clearMessages() {
 document.querySelectorAll('input').forEach(input => {
     input.addEventListener('blur', function() {
         const value = this.value.trim();
-        
+
         if (value && this.id === 'email' && !isValidEmail(value)) {
             showError('email', 'Por favor, insira um email válido.');
         }
-        
+
         if (this.id === 'confirmPassword' && value !== document.getElementById('password').value) {
             showError('confirmPassword', 'As senhas não coincidem.');
         }
     });
-    
+
     input.addEventListener('input', function() {
         // Clear error when user starts typing
         const error = this.parentNode.querySelector('.error-message');
         if (error && !error.textContent.includes('obrigatório')) {
             error.remove();
             this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+        }
+
+        // Save input values to sessionStorage
+        if (this.id === 'nome') {
+            sessionStorage.setItem('registroNome', this.value);
+        } else if (this.id === 'email') {
+            sessionStorage.setItem('registroEmail', this.value);
         }
     });
 });
@@ -240,8 +247,21 @@ document.querySelectorAll('.form-group input').forEach(input => {
     input.addEventListener('focus', function() {
         this.parentNode.style.transform = 'scale(1.02)';
     });
-    
+
     input.addEventListener('blur', function() {
         this.parentNode.style.transform = 'scale(1)';
     });
+});
+
+// Restore saved values from sessionStorage
+document.addEventListener('DOMContentLoaded', function() {
+    const savedNome = sessionStorage.getItem('registroNome');
+    if (savedNome) {
+        document.getElementById('nome').value = savedNome;
+    }
+
+    const savedEmail = sessionStorage.getItem('registroEmail');
+    if (savedEmail) {
+        document.getElementById('email').value = savedEmail;
+    }
 });

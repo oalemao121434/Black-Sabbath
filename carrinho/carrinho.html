@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Carrinho - BLACK SABBATH Cosmos</title>
     <link rel="stylesheet" href="../inicio/inicio.css" />
+    <link rel="stylesheet" href="carrinho.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -50,9 +51,45 @@
                         </div>
                         <div id="cart-items-list"></div>
                     </div>
+                    <div class="cart-options">
+                        <div class="coupon-section">
+                            <label for="coupon-input">Cupom de Desconto:</label>
+                            <input type="text" id="coupon-input" placeholder="Digite o código do cupom">
+                            <button id="apply-coupon-btn" class="btn-secondary">Aplicar</button>
+                            <span id="coupon-message"></span>
+                        </div>
+                        <div class="shipping-section">
+                            <label for="cep-input">CEP para Frete:</label>
+                            <input type="text" id="cep-input" placeholder="00000-000" maxlength="9">
+                            <button id="calculate-freight-btn" class="btn-secondary">Calcular Frete</button>
+                            <div id="shipping-options" style="display: none;">
+                                <label>Método de Envio:</label>
+                                <select id="shipping-method">
+                                    <option value="pac">PAC - R$ 15,00 (5-10 dias)</option>
+                                    <option value="sedex">SEDEX - R$ 25,00 (1-3 dias)</option>
+                                    <option value="express">Express - R$ 35,00 (até 1 dia)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="currency-section">
+                            <label for="currency-select">Moeda:</label>
+                            <select id="currency-select">
+                                <option value="BRL">BRL (R$)</option>
+                                <option value="USD">USD ($)</option>
+                            </select>
+                        </div>
+                        <div class="share-cart">
+                            <button id="share-cart-btn" class="btn-secondary">Compartilhar Carrinho</button>
+                        </div>
+                    </div>
                     <div class="cart-summary">
-                        <div class="cart-total">
-                            <strong>Total: R$ <span id="cart-total">0,00</span></strong>
+                        <div class="summary-details">
+                            <p>Subtotal: R$ <span id="cart-subtotal">0,00</span></p>
+                            <p>Frete: R$ <span id="cart-freight">0,00</span></p>
+                            <p>Impostos: R$ <span id="cart-taxes">0,00</span></p>
+                            <p>Desconto: R$ <span id="cart-discount">0,00</span></p>
+                            <p><strong>Total: <span id="currency-symbol">R$</span> <span id="cart-total">0,00</span></strong></p>
+                            <p id="delivery-estimate" style="display: none;">Estimativa de Entrega: <span id="estimate-days"></span></p>
                         </div>
                         <div class="cart-actions">
                             <a href="../inicio/inicio.html" class="btn-secondary">Continuar Comprando</a>
