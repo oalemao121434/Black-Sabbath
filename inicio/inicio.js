@@ -33,11 +33,16 @@ class BlackSabbathCosmos {
                     </div>
                     <h3>${planeta.nome}</h3>
                     <p>${planeta.descricao}</p>
-                    <span class="price">${planeta.preco.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+                    <span class="price">R$ ${planeta.preco.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
                     <div class="card-buttons">
-                        <button class="btn" onclick="window.cosmos.addToCart(${planeta.id})">Comprar</button>
+                        <button class="btn" onclick="window.cosmos.addToCart(${planeta.id})">
+                            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                        </button>
                         <button class="btn-secondary" onclick="window.cosmos.addToWishList(${planeta.id})">
                             <i class="fas fa-heart"></i> Lista de Desejos
+                        </button>
+                        <button class="btn-secondary" onclick="window.cosmos.showDetails(${planeta.id})">
+                            <i class="fas fa-eye"></i> Ver Detalhes
                         </button>
                     </div>
                 </div>
@@ -182,7 +187,7 @@ class BlackSabbathCosmos {
             console.error('Erro ao carregar dados dos produtos:', error);
             // Fallback para dados locais se o servidor não estiver disponível
             try {
-                const localResponse = await fetch('./json/db.json');
+                const localResponse = await fetch('../json/db.json');
                 const localData = await localResponse.json();
                 this.productData = localData.planetas;
                 console.log('📊 Dados locais carregados:', this.productData.length, 'produtos');

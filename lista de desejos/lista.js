@@ -15,11 +15,21 @@ class ListaDesejosCosmos {
 
     async loadProducts() {
         try {
-            const response = await fetch('../json/db.json');
+            const response = await fetch('http://localhost:3000/planetas');
             const data = await response.json();
-            this.products = data.planetas;
+            this.products = data;
         } catch (error) {
             console.error('Erro ao carregar produtos:', error);
+            // Fallback para dados locais se o servidor não estiver disponível
+            try {
+                const localResponse = await fetch('../json/db.json');
+                const localData = await localResponse.json();
+                this.products = localData.planetas;
+                console.log('📊 Dados locais carregados:', this.products.length, 'produtos');
+            } catch (localError) {
+                console.error('Erro ao carregar dados locais:', localError);
+                this.products = [];
+            }
         }
     }
 
@@ -111,12 +121,13 @@ class ListaDesejosCosmos {
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
-                cart.push({
-                    id: product.id,
-                    nome: product.nome,
-                    preco: product.preco,
-                    quantity: 1
-                });
+            cart.push({
+                id: product.id,
+                nome: product.nome,
+                preco: product.preco,
+                imagem: product.imagem,
+                quantity: 1
+            });
             }
 
             localStorage.setItem('blackSabbathCart', JSON.stringify(cart));
