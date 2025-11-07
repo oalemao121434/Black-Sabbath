@@ -183,6 +183,8 @@ class BlackSabbathCosmos {
             const data = await response.json();
             this.productData = data;
             console.log('📊 Dados dos produtos carregados:', this.productData.length, 'produtos');
+            // Renderizar cards dinamicamente após carregar dados
+            this.renderProductCards();
         } catch (error) {
             console.error('Erro ao carregar dados dos produtos:', error);
             // Fallback para dados locais se o servidor não estiver disponível
@@ -191,9 +193,12 @@ class BlackSabbathCosmos {
                 const localData = await localResponse.json();
                 this.productData = localData.planetas;
                 console.log('📊 Dados locais carregados:', this.productData.length, 'produtos');
+                // Renderizar cards dinamicamente após carregar dados locais
+                this.renderProductCards();
             } catch (localError) {
                 console.error('Erro ao carregar dados locais:', localError);
                 this.productData = [];
+                // Manter cards hardcoded como fallback final
             }
         }
     }
@@ -219,7 +224,7 @@ class BlackSabbathCosmos {
                 <button class="modal-close">×</button>
 
                 <div style="display: flex; gap: 20px; margin-bottom: 20px;">
-                    <img src="../imagens/planeta-${product.id}.jpg" alt="${product.nome}" style="
+                    <img src="${product.imagem}" alt="${product.nome}" style="
                         width: 200px;
                         height: 200px;
                         object-fit: cover;

@@ -68,6 +68,235 @@ es nos campos õo <!DOCTYPE html>
                 </div>
 
                 <div class="container" id="produtos-container">
+                    <!-- Cards hardcoded para fallback -->
+                    <div class="card" data-product-id="1">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta-1.jpg" alt="Terra" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Terra</h3>
+                            <p>O planeta azul, lar da humanidade.</p>
+                            <span class="price">R$ 1.000.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(1)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(1)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="2">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta-2.jpg" alt="Marte" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Marte</h3>
+                            <p>O planeta vermelho, candidato à colonização.</p>
+                            <span class="price">R$ 500.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(2)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(2)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="3">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta 3.jpg" alt="Vênus" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Vênus</h3>
+                            <p>O planeta mais quente do sistema solar.</p>
+                            <span class="price">R$ 200.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(3)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(3)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="4">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta-4.jpg" alt="Júpiter" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Júpiter</h3>
+                            <p>O gigante gasoso com a Grande Mancha Vermelha.</p>
+                            <span class="price">R$ 2.000.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(4)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(4)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="5">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta-5.jpg" alt="Saturno" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Saturno</h3>
+                            <p>O planeta com os anéis mais espetaculares.</p>
+                            <span class="price">R$ 1.500.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(5)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(5)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="6">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta-6.jpg" alt="Urano" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Urano</h3>
+                            <p>O planeta inclinado, com cor azul-esverdeada.</p>
+                            <span class="price">R$ 800.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(6)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(6)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="7">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta-7.jpg" alt="Netuno" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Netuno</h3>
+                            <p>O planeta mais distante do Sol.</p>
+                            <span class="price">R$ 600.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(7)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(7)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="8">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta-8.jpg" alt="Mercúrio" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Mercúrio</h3>
+                            <p>O planeta mais próximo do Sol.</p>
+                            <span class="price">R$ 100.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(8)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(8)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="9">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta-9.jpg" alt="Plutão" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Plutão</h3>
+                            <p>O antigo nono planeta, agora planeta anão.</p>
+                            <span class="price">R$ 50.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(9)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(9)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="10">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta 10.jpg" alt="Ceres" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Ceres</h3>
+                            <p>O maior asteroide do cinturão de asteroides.</p>
+                            <span class="price">R$ 25.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(10)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(10)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="11">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta-11.jpg" alt="Haumea" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Haumea</h3>
+                            <p>Planeta anão com forma alongada.</p>
+                            <span class="price">R$ 30.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(11)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(11)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" data-product-id="12">
+                        <div class="card-content">
+                            <div class="card-image-container">
+                                <img src="imagens/planeta 12.jpg" alt="Makemake" loading="lazy">
+                                <div class="card-image-overlay"></div>
+                            </div>
+                            <h3>Makemake</h3>
+                            <p>Planeta anão do cinturão de Kuiper.</p>
+                            <span class="price">R$ 35.000,00</span>
+                            <div class="card-buttons">
+                                <button class="btn" onclick="window.cosmos.addToCart(12)">
+                                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                                </button>
+                                <button class="btn-secondary" onclick="window.cosmos.addToWishList(12)">
+                                    <i class="fas fa-heart"></i> Lista de Desejos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Cards serão renderizados dinamicamente pelo JavaScript -->
                 </div>
 
