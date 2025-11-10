@@ -1,42 +1,73 @@
-// Verificar se o usuário está logado ao carregar a página
-document.addEventListener('DOMContentLoaded', function() {
-    checkUserLogin();
+// Verificar se o usuário está logado ao carregar a página usando Supabase
+document.addEventListener('DOMContentLoaded', async function() {
+    await checkUserLogin();
 });
 
-// Função para verificar se o usuário está logado
-function checkUserLogin() {
-    const authToken = localStorage.getItem('authToken');
-    const userData = localStorage.getItem('user');
+// Função para verificar se o usuário está logado usando Supabase
+async function checkUserLogin() {
+    try {
+        // Verificar sessão atual com Supabase
+        const { data, error } = await window.auth.getUser();
 
-    if (!authToken || !userData) {
-        // Usuário não está logado, redirecionar para login
-        alert('Você precisa estar logado para acessar esta página.');
+        if (error || !data.user) {
+            // Usuário não está logado, redirecionar para login
+            alert('Você precisa estar logado para acessar esta página.');
+            window.location.href = '../login/login.html';
+            return;
+        }
+
+        // Usuário está logado, exibir informações
+        displayUserInfo(data.user);
+
+    } catch (error) {
+        console.error('Erro ao verificar login:', error);
+        alert('Erro ao verificar autenticação. Redirecionando para login.');
         window.location.href = '../login/login.html';
-        return;
     }
-
-    // Usuário está logado, exibir informações
-    displayUserInfo(JSON.parse(userData));
 }
 
 // Função para exibir as informações do usuário
 function displayUserInfo(user) {
-    document.getElementById('user-name').textContent = user.username || 'Usuário';
+    // Usar email como username se não houver nome
+    const username = user.user_metadata?.full_name || user.email.split('@')[0] || 'Usuário';
+    document.getElementById('user-name').textContent = username;
     document.getElementById('user-email').textContent = user.email;
     document.getElementById('user-id').textContent = user.id;
+
+    // Salvar dados atualizados no localStorage para compatibilidade
+    const userData = {
+        id: user.id,
+        email: user.email,
+        username: username
+    };
+    localStorage.setItem('user', JSON.stringify(userData));
 }
 
-// Função para deslogar o usuário
-document.getElementById('logout-btn').addEventListener('click', function() {
-    logoutUser();
+// Função para deslogar o usuário usando Supabase
+document.getElementById('logout-btn').addEventListener('click', async function() {
+    await logoutUser();
 });
 
-function logoutUser() {
-    // Remover dados do localStorage
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-    localStorage.removeItem('rememberMe');
+async function logoutUser() {
+    try {
+        // Fazer logout com Supabase
+        const { error } = await window.auth.signOut();
 
-    // Redirecionar diretamente para a página de login
-    window.location.href = '../login/login.html';
+        if (error) {
+            console.error('Erro no logout:', error);
+            alert('Erro ao fazer logout. Tente novamente.');
+            return;
+        }
+
+        // Limpar dados do localStorage
+        localStorage.removeItem('user');
+        localStorage.removeItem('rememberMe');
+
+        // Redirecionar para a página inicial
+        window.location.href = '../inicio/inicio.html';
+
+    } catch (error) {
+        console.error('Erro no logout:', error);
+        alert('Erro ao fazer logout. Tente novamente.');
+    }
 }

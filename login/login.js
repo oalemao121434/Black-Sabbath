@@ -1,5 +1,5 @@
-// Configuração da API
-const API_BASE_URL = 'http://localhost:5000/api/auth';
+// Configuração do Supabase para autenticação
+// Usando as funções do supabaseClient.js
 
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -26,9 +26,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     if (!password) {
         showError('password', 'Senha é obrigatória.');
         isValid = false;
-    } else if (!isValidPassword(password)) {
-        showError('password', 'A senha deve ter entre 8 e 20 caracteres, incluindo pelo menos uma letra maiúscula, um número e um caractere especial.');
-        isValid = false;
     }
 
     if (isValid) {
@@ -36,7 +33,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     }
 });
 
-// Login user function
+// Função de login usando Supabase
 async function loginUser(userData) {
     const button = document.querySelector('.submit-btn');
     const originalText = button.querySelector('.btn-text').textContent;
@@ -46,27 +43,26 @@ async function loginUser(userData) {
     button.disabled = true;
 
     try {
-        // Simular delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Fazer login com Supabase
+        const { data, error } = await window.auth.signIn(userData.email, userData.password);
 
-        // Buscar usuários do localStorage
-        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-        const user = existingUsers.find(u => u.email === userData.email && u.password === userData.password);
-
-        if (!user) {
-            throw new Error('Credenciais inválidas');
+        if (error) {
+            throw error;
         }
 
-        // Gerar token simples
-        const token = btoa(JSON.stringify({ id: user.id, email: user.email }));
-
+        // Login bem-sucedido
         showSuccess('Login realizado com sucesso! Redirecionando...');
 
-        // Salvar token e dados do usuário
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('user', JSON.stringify({ id: user.id, username: user.username, email: user.email }));
+        // Salvar dados do usuário no localStorage
+        if (data.user) {
+            localStorage.setItem('user', JSON.stringify({
+                id: data.user.id,
+                email: data.user.email,
+                username: data.user.email.split('@')[0] // Usar parte do email como username
+            }));
+        }
 
-        // Se "Lembrar de mim" estiver marcado, salvar por mais tempo
+        // Se "Lembrar de mim" estiver marcado
         if (userData.rememberMe) {
             localStorage.setItem('rememberMe', 'true');
         } else {
@@ -77,15 +73,22 @@ async function loginUser(userData) {
         setTimeout(() => {
             window.location.href = '../inicio/inicio.html';
         }, 1500);
+
     } catch (error) {
         console.error('Erro no login:', error);
 
-        // Mensagens de erro específicas
-        if (error.message.includes('Credenciais inválidas')) {
-            showError('form', 'Email ou senha incorretos. Tente novamente.');
-        } else {
-            showError('form', error.message || 'Erro ao realizar login. Tente novamente.');
+        // Mensagens de erro específicas do Supabase
+        let errorMessage = 'Erro ao realizar login. Tente novamente.';
+
+        if (error.message.includes('Invalid login credentials')) {
+            errorMessage = 'Email ou senha incorretos. Tente novamente.';
+        } else if (error.message.includes('Email not confirmed')) {
+            errorMessage = 'Por favor, confirme seu email antes de fazer login.';
+        } else if (error.message.includes('Too many requests')) {
+            errorMessage = 'Muitas tentativas. Tente novamente em alguns minutos.';
         }
+
+        showError('form', errorMessage);
     } finally {
         // Restore button state
         button.classList.remove('loading');

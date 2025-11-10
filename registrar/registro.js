@@ -1,5 +1,5 @@
-// Configuração da API
-const API_BASE_URL = 'http://localhost:5000/api/auth';
+// Configuração do Supabase para autenticação
+// Usando as funções do supabaseClient.js
 
 document.getElementById('registroForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -36,8 +36,8 @@ document.getElementById('registroForm').addEventListener('submit', async functio
     if (!password) {
         showError('password', 'Senha é obrigatória.');
         isValid = false;
-    } else if (!isValidPassword(password)) {
-        showError('password', 'A senha deve ter entre 8 e 20 caracteres, incluindo pelo menos uma letra maiúscula, um número e um caractere especial.');
+    } else if (password.length < 6) {
+        showError('password', 'A senha deve ter pelo menos 6 caracteres.');
         isValid = false;
     }
 
@@ -59,13 +59,13 @@ document.getElementById('registroForm').addEventListener('submit', async functio
 document.getElementById('password').addEventListener('input', function(e) {
     const password = e.target.value;
     const strengthBar = document.querySelector('.strength-bar');
-    
+
     let strength = 0;
     if (password.length >= 6) strength += 1;
     if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength += 1;
     if (password.match(/\d/)) strength += 1;
     if (password.match(/[^a-zA-Z\d]/)) strength += 1;
-    
+
     strengthBar.className = 'strength-bar';
     if (password.length > 0) {
         if (strength <= 1) {
@@ -78,7 +78,7 @@ document.getElementById('password').addEventListener('input', function(e) {
     }
 });
 
-// Register user function
+// Função de registro usando Supabase
 async function registerUser(userData) {
     const button = document.querySelector('.submit-btn');
     const originalText = button.querySelector('.btn-text').textContent;
@@ -88,50 +88,41 @@ async function registerUser(userData) {
     button.disabled = true;
 
     try {
-        // Simular delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Fazer registro com Supabase
+        const { data, error } = await window.auth.signUp(userData.email, userData.password);
 
-        // Verificar se usuário já existe
-        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-        const userExists = existingUsers.find(user => user.email === userData.email);
-
-        if (userExists) {
-            throw new Error('Usuário ou email já existe');
+        if (error) {
+            throw error;
         }
 
-        // Criar novo usuário
-        const newUser = {
-            id: Date.now(),
-            username: userData.nome,
-            email: userData.email,
-            password: userData.password // Em produção, deve ser hash
-        };
+        // Registro bem-sucedido
+        showSuccess('Registro realizado com sucesso! Verifique seu email para confirmar a conta.');
 
-        existingUsers.push(newUser);
-        localStorage.setItem('users', JSON.stringify(existingUsers));
+        // Salvar dados básicos do usuário (sem fazer login automático)
+        // O usuário precisa confirmar o email primeiro
 
-        // Gerar token simples
-        const token = btoa(JSON.stringify({ id: newUser.id, email: newUser.email }));
-
-        showSuccess('Registro realizado com sucesso! Redirecionando para login...');
-
-        // Salvar token e dados do usuário
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('user', JSON.stringify({ id: newUser.id, username: newUser.username, email: newUser.email }));
-
-        // Redirecionar para a página de login após 2 segundos
+        // Redirecionar para a página de login após 3 segundos
         setTimeout(() => {
             window.location.href = '../login/login.html';
-        }, 2000);
+        }, 3000);
+
     } catch (error) {
         console.error('Erro no registro:', error);
 
-        // Mensagens de erro específicas
-        if (error.message.includes('Usuário ou email já existe')) {
-            showError('email', 'Este email já está em uso.');
-        } else {
-            showError('form', error.message || 'Erro ao realizar registro. Tente novamente.');
+        // Mensagens de erro específicas do Supabase
+        let errorMessage = 'Erro ao realizar registro. Tente novamente.';
+
+        if (error.message.includes('User already registered')) {
+            errorMessage = 'Este email já está cadastrado.';
+        } else if (error.message.includes('Password should be at least')) {
+            errorMessage = 'A senha deve ter pelo menos 6 caracteres.';
+        } else if (error.message.includes('Invalid email')) {
+            errorMessage = 'Por favor, insira um email válido.';
+        } else if (error.message.includes('Signup is disabled')) {
+            errorMessage = 'Registro temporariamente desabilitado.';
         }
+
+        showError('form', errorMessage);
     } finally {
         // Restore button state
         button.classList.remove('loading');

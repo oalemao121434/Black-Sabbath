@@ -307,7 +307,37 @@ class BlackSabbathCosmos {
     }
 }
 
+// Função para verificar autenticação e atualizar navbar
+async function checkAuthAndUpdateNavbar() {
+    try {
+        const { data, error } = await window.auth.getUser();
+
+        if (data.user && !error) {
+            // Usuário logado - mostrar link do usuário, esconder login/registro
+            document.getElementById('login-link').style.display = 'none';
+            document.getElementById('register-link').style.display = 'none';
+            document.getElementById('user-link').style.display = 'block';
+
+            // Exibir mensagem de boas-vindas
+            const username = data.user.user_metadata?.full_name || data.user.email.split('@')[0];
+            window.cosmos.showNotification(`Bem-vindo, ${username}!`);
+        } else {
+            // Usuário não logado - mostrar login/registro, esconder usuário
+            document.getElementById('login-link').style.display = 'block';
+            document.getElementById('register-link').style.display = 'block';
+            document.getElementById('user-link').style.display = 'none';
+        }
+    } catch (error) {
+        console.error('Erro ao verificar autenticação:', error);
+        // Em caso de erro, mostrar opções de login/registro
+        document.getElementById('login-link').style.display = 'block';
+        document.getElementById('register-link').style.display = 'block';
+        document.getElementById('user-link').style.display = 'none';
+    }
+}
+
 // Inicializar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     window.cosmos = new BlackSabbathCosmos();
+    await checkAuthAndUpdateNavbar();
 });
